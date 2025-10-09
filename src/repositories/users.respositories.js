@@ -21,11 +21,13 @@ function createUserRepository(newUser) {
                 if(err){
                     rej(err)
                 } else{
-                    res({message: 'User successfully created!'})
+                    res({id: this.lastID, ...newUser})
                 }
             }
         )
     })
 }
 
-export default createUserRepository
+export default {
+    createUserRepository
+}
