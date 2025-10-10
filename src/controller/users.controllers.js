@@ -30,9 +30,23 @@ async function findUserById(req, res){
     }
 }
 
+async function updateUser(req, res){
+    const {id} = req.params;
+    const newUser = req.body;
+
+    try {
+        const user = await userServices.updateUser(newUser, id)
+        res.send({user});
+    } catch (error) {
+        return res.status(404).send(error.message)
+    }
+
+}
+
 
 export default {
     createUserController,
     findAllUsers,
-    findUserById
+    findUserById,
+    updateUser
 }

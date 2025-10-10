@@ -70,9 +70,26 @@ function findAllUsers(){
     });
 }
 
+function updateUser(id, updatedUser){
+    return new Promise((resolve, reject) => {
+        const {username, email, password, avatar} = updatedUser
+        db.run(`
+            UPDATE users SET username=?, email=?, password=?, avatar=?           
+            WHERE id = ?
+            `, [username, email, password, avatar, id], (err) =>{
+                if(err){
+                    reject(err)
+                } else{
+                    resolve({id, ...updatedUser})
+                }
+            });
+    });
+}
+
 export default {
     createUserRepository,
     findUserByEmail,
     findUserById,
-    findAllUsers
+    findAllUsers,
+    updateUser
 }

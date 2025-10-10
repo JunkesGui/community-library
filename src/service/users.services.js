@@ -22,8 +22,19 @@ async function findUserByID(id){
     return user;
 }
 
+async function updateUser(newUser, userId){
+    const user = await usersRepositories.findUserById(userId)
+    if (!user) throw new Error('User not found!')
+    if(newUser.password){
+        newUser.password = await bcrypt.hash(newUser.password, 10)
+    }
+    const updatedUser = usersRepositories.updateUser(userId, newUser)
+    return updatedUser 
+}
+
 export default {
     createUserService,
     findAllUsers,
-    findUserByID
+    findUserByID,
+    updateUser
 }
