@@ -11,6 +11,18 @@ async function createUserController(req,res){
     }
 }
 
+async function findAllUsers(req,res){
+    try {
+        const users = await userServices.findAllUsers();
+        res.send({users});
+    } catch (error) {
+        return res.status(404).send(error.message);
+    }
+}
+
+
+
 export default {
-    createUserController
+    createUserController,
+    findAllUsers
 }
