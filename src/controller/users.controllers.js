@@ -20,9 +20,19 @@ async function findAllUsers(req,res){
     }
 }
 
+async function findUserById(req, res){
+    const {id} = req.params;
+    try {
+        const user = await userServices.findUserByID(id)
+        res.send({user});
+    } catch (error) {
+        return res.status(404).send(error.message);
+    }
+}
 
 
 export default {
     createUserController,
-    findAllUsers
+    findAllUsers,
+    findUserById
 }

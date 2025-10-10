@@ -8,5 +8,6 @@ const router = Router();
 router.post('/users', validate(userSchema), userControllers.createUserController);
 
 router.get('/users', userControllers.findAllUsers)
+router.get('/users/:id', userControllers.findUserById)
 
 export default router
