@@ -86,10 +86,26 @@ function updateUser(id, updatedUser){
     });
 }
 
+function deleteUser(id){
+    return new Promise((resolve, reject) => {
+        db.run(`
+            DELETE FROM users WHERE id = ?
+            `, [id], (err) =>{
+                if (err){
+                    reject(err)
+                } else{
+                    const message = `User ${id} deleted successfully!`
+                    resolve({message: message})
+                }
+            })
+    })
+}
+
 export default {
     createUserRepository,
     findUserByEmail,
     findUserById,
     findAllUsers,
-    updateUser
+    updateUser,
+    deleteUser
 }

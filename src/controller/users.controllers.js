@@ -35,18 +35,29 @@ async function updateUser(req, res){
     const newUser = req.body;
 
     try {
-        const user = await userServices.updateUser(newUser, id)
+        const user = await userServices.updateUser(newUser, id);
         res.send({user});
     } catch (error) {
-        return res.status(404).send(error.message)
+        return res.status(404).send(error.message);
     }
 
 }
 
+async function deleteUser(req,res){
+    const {id} = req.params;
+
+    try {
+        const message = await userServices.deleteUser(id);
+        res.send({message});
+    } catch (error) {
+        return res.status(404).send(error.message);
+    }
+}
 
 export default {
     createUserController,
     findAllUsers,
     findUserById,
-    updateUser
+    updateUser,
+    deleteUser
 }
