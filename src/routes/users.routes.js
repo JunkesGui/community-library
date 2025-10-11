@@ -13,7 +13,7 @@ router.get('/users', userControllers.findAllUsers);
 router.get('/users/:id', validateUserId(userIdSchema) ,userControllers.findUserById);
 
 //PUT
-router.put('/users/:id', validateUserId(userIdSchema), validate(userSchema) ,userControllers.updateUser);
+router.patch('/users/:id', validateUserId(userIdSchema), validate(userSchema) ,userControllers.updateUser);
 
 // DELETE
 router.delete('/users/:id', validateUserId(userIdSchema), userControllers.deleteUser);
