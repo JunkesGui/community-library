@@ -11,8 +11,32 @@ async function findAllBooks() {
     return books;
 }
 
+async function findBookByID(bookId){
+    const book = await booksRepositories.findBookByID(bookId);
+    if (!book) throw new Error ("Book not found");
+    return book;
+}
+
+async function updateBook(updatedBook, bookId, userId){
+    const book = await booksRepositories.findBookByID(bookId);
+    if (!book) throw new Error ("Book not found");
+    if (book.userId !== userId) throw new Error ("Unauthorized");
+    const response = await booksRepositories.updateBook(bookId,updatedBook);
+    return response;
+}
+
+async function deleteBook(bookId, userId){
+    const book = await booksRepositories.findBookByID(bookId);
+    if (!book) throw new Error ("Book not found");
+    if (book.userId !== userId) throw new Error ("Unauthorized");
+    const response = await booksRepositories.deleteBook(bookId);
+    return response;
+}
 
 export default{
     createBook,
-    findAllBooks
+    findAllBooks,
+    findBookByID,
+    updateBook,
+    deleteBook
 }
