@@ -58,11 +58,23 @@ async function deleteBook(req, res){
     }
 }
 
+async function searchBook(req, res) {
+    const {search} = req.query
+
+    try {
+        const books = await booksServices.searchBook(search);
+        res.send(books);
+    } catch (err) {
+        return res.status(400).send({message: err.message}) 
+    }
+}
+
 
 export default{
     createBook,
     findAllBooks,
     findBookByID,
     updateBook,
-    deleteBook
+    deleteBook,
+    searchBook
 }

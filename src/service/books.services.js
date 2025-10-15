@@ -33,10 +33,17 @@ async function deleteBook(bookId, userId){
     return response;
 }
 
+async function searchBook(search){
+    if (!search) return await booksRepositories.findAllBooks();
+    const books = await booksRepositories.searchBook(search);
+    return books;
+}
+
 export default{
     createBook,
     findAllBooks,
     findBookByID,
     updateBook,
-    deleteBook
+    deleteBook,
+    searchBook
 }
