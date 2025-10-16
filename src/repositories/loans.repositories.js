@@ -28,7 +28,10 @@ function createLoan(userId, bookId, dueDate){
 function findAllLoans(){
     return new Promise((resolve, reject) => {
         db.all(
-            `SELECT * FROM loans`, [], (err, rows) =>{
+            `SELECT loans.id, loans.dueDate, users.email, books.title FROM loans 
+            JOIN users ON loans.userId = users.id
+            JOIN books ON loans.bookId = books.id
+            `, [], (err, rows) =>{
                 if (err){
                     reject(err);
                 } else {
