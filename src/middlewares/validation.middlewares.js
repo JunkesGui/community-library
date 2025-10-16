@@ -1,5 +1,6 @@
 import { userIdSchema } from "../schema/user.schema.js";
 import { bookIdSchema } from "../schema/book.schema.js";
+import { loanIdSchema } from "../schema/loan.schema.js";
 
 const validate = (schema) => (req, res, next) =>{
     try {
@@ -30,4 +31,14 @@ const validateBookId = () => (req,res,next)=>{
     }
 }
 
-export {validate, validateUserId, validateBookId};
+const  validateLoanId = () => (req, res, next)=>{
+    try {
+        const loanId = +req.params.id;
+        loanIdSchema.parse({loanId: loanId})
+        next();
+    } catch (err) {
+        res.status(400).json({error: err})
+    }
+}
+
+export {validate, validateUserId, validateBookId, validateLoanId};
