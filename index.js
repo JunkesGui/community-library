@@ -3,6 +3,7 @@ import userRouters from './src/routes/users.routes.js'
 import booksRouters from './src/routes/books.routes.js'
 import loanRouters from './src/routes/loans.routes.js'
 import "dotenv/config"
+import "./src/service/cron.service.js"
 
 const app = express();
 app.use(express.json());
