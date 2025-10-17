@@ -8,22 +8,22 @@ const router = Router();
 
 // POST
 // Criar usuario
-router.post('/users', validate(userSchema), userControllers.createUserController);
+router.post('/', validate(userSchema), userControllers.createUserController);
 
 //Login
-router.post('/users/login', userControllers.loginUser);
+router.post('/login', userControllers.loginUser);
 
 
 router.use(authMiddleware);
 
 // GET
-router.get('/users', userControllers.findAllUsers);
-router.get('/users/:id', validateUserId(userIdSchema) ,userControllers.findUserById);
+router.get('/', userControllers.findAllUsers);
+router.get('/:id', validateUserId(userIdSchema) ,userControllers.findUserById);
 
 //PUT
-router.patch('/users/:id', validateUserId(userIdSchema), validate(userSchema) ,userControllers.updateUser);
+router.patch('/:id', validateUserId(userIdSchema), validate(userSchema) ,userControllers.updateUser);
 
 // DELETE
-router.delete('/users/:id', validateUserId(userIdSchema), userControllers.deleteUser);
+router.delete('/:id', validateUserId(userIdSchema), userControllers.deleteUser);
 
 export default router

@@ -7,13 +7,13 @@ import { loanIdSchema } from "../schema/loan.schema.js"
 const router = Router();
 
 //POST
-router.post("/loans", validate(loanSchema) ,loansController.createdLoan);
+router.post("/", validate(loanSchema) ,loansController.createdLoan);
 
 //GET
-router.get("/loans", loansController.findAllLoans);
-router.get("/loans/:id", validateLoanId(loanIdSchema), loansController.findLoanById);
+router.get("/", loansController.findAllLoans);
+router.get("/:id", validateLoanId(loanIdSchema), loansController.findLoanById);
 
 //DELETE
-router.delete("/loans/:id", validateLoanId(loanIdSchema), loansController.deleteLoan)
+router.delete("/:id", validateLoanId(loanIdSchema), loansController.deleteLoan)
 
 export default router;

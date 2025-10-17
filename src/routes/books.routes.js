@@ -10,20 +10,20 @@ const router = Router()
 router.use(authMiddleware)
 
 //POST
-router.post("/books", validate(bookSchema), authMiddleware, booksControllers.createBook);
+router.post("/", validate(bookSchema), authMiddleware, booksControllers.createBook);
 
 //GET SEARCH
-router.get("/books/search", booksControllers.searchBook);
+router.get("/search", booksControllers.searchBook);
 //GET
-router.get("/books", booksControllers.findAllBooks);
-router.get("/books/:id", validateBookId(bookIdSchema), booksControllers.findBookByID);
+router.get("/", booksControllers.findAllBooks);
+router.get("/:id", validateBookId(bookIdSchema), booksControllers.findBookByID);
 
 
 //PATCH
-router.patch("/books/:id", validate(bookSchema), validateBookId(bookIdSchema), booksControllers.updateBook);
+router.patch("/:id", validate(bookSchema), validateBookId(bookIdSchema), booksControllers.updateBook);
 
 //DELETE
-router.delete("/books/:id", validateBookId(bookIdSchema), booksControllers.deleteBook);
+router.delete("/:id", validateBookId(bookIdSchema), booksControllers.deleteBook);
 
 
 export default router;
